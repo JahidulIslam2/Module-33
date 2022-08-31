@@ -1,0 +1,26 @@
+
+body{
+    background-color: bisque;
+}
+#container{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 10px;
+    color: black;
+    
+    
+}
+.elementName{
+    background-color: cadetblue;
+    padding-left: 15px;
+    border-radius: 4px;
+}
+.btn{
+    height: 30px;
+    border-radius: 4px;
+    background-color: rgb(50, 202, 50);
+    color: white;
+    margin-bottom: 8px;
+    
+    
+}
