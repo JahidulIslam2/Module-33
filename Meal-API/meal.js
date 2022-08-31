@@ -6,7 +6,6 @@ const MealsSite= (search) => {
     .then(data => Displayed(data.meals))
 }
 
-
 const Displayed=(Mealdata) => {
     const getElement=document.getElementById('meals-id')
     getElement.innerText='';
@@ -14,7 +13,7 @@ const Displayed=(Mealdata) => {
         const mealDiv =document.createElement('div');
         mealDiv.classList.add('col');
         mealDiv.innerHTML=`
-            <div class="card">
+            <div onclick="mealDetailsById(${meal.idMeal})"class="card">
                 <img src="${meal.strMealThumb}" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">${meal.strMeal}</h5>
@@ -41,4 +40,31 @@ const searchMeals = () =>{
 
 }
 
+const mealDetailsById =(mealId) => {
+    // console.log(mealId)
+
+    const urlCode =`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`;
+    // console.log(urlCode)
+
+    fetch(urlCode)
+    .then(response => response.json())
+    .then(data => MealsDetail(data.meals[0]))
+
+}
+
 // MealsSite('meat');
+const MealsDetail = (mealCode) =>{
+    const getDelatilsCard=document.getElementById('Details-Card');
+    getDelatilsCard.innerText=''
+    const elementCreate =document.createElement('div');
+    elementCreate.classList.add('card-div');
+    elementCreate.innerHTML=`
+    <img src="${mealCode.strMealThumb}" class="card-img-top" alt="...">
+           <div class="card-body">
+           <h5 class="card-title">${mealCode.strMeal}</h5>
+           <p class="card-text">${mealCode.strInstructions.slice(0,200)}</p>
+           <button type="button" class="btn btn-primary" data-bs-toggle="button">Details More</button>
+        </div>
+        `;
+        getDelatilsCard.appendChild(elementCreate);
+}
